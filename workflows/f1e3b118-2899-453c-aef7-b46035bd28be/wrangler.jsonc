@@ -1,0 +1,24 @@
+// Exported from N2C (contracts/data-plane.md export bundle, T071).
+// `wrangler deploy` from this directory reproduces the deployed behavior
+// with no N2C dependency. See README.md before deploying — some
+// ids below may be placeholders that need a real resource created first.
+{
+  "name": "cc-f1e3b118-2899-453c-aef7-b46035bd28be",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "CC_RUN_KV",
+      "id": "dc182f4be9bf467683206670b584771c"
+    }
+  ],
+  "analytics_engine_datasets": [
+    {
+      "binding": "CC_ANALYTICS",
+      "dataset": "cc_f1e3b118_2899_453c_aef7_b46035bd28be_runs"
+    }
+  ]
+}

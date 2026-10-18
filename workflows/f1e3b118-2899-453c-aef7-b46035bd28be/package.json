@@ -1,0 +1,14 @@
+{
+  "name": "cc-f1e3b118-2899-453c-aef7-b46035bd28be",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.42.0",
+    "@cloudflare/workers-types": "4.20251001.0",
+    "typescript": "5.9.3"
+  }
+}
