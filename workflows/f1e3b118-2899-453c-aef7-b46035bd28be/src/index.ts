@@ -109,74 +109,8 @@ export default {
         if (__ccRunLog.length < 500) { __ccRunLog.push({ nodeId: "google_calendar_1", nodeType: "google_calendar", status: "success", input: __ccSnapshot({ "manual_trigger_1": ctx.nodes["manual_trigger_1"] }, 32768), output: __ccSnapshot(ctx.nodes["google_calendar_1"], 32768) }); }
         console.log("__CC_DEBUG__" + JSON.stringify({ nodeId: "google_calendar_1", phase: "success", input: __ccSnapshot({ "manual_trigger_1": ctx.nodes["manual_trigger_1"] }, 32768), output: __ccSnapshot(ctx.nodes["google_calendar_1"], 32768) }));
       }
-      // === Node: gmail_1 (gmail) ===
-      {
-        const __ccStart = Date.now();
-        console.log("__CC_DEBUG__" + JSON.stringify({ nodeId: "gmail_1", phase: "executing" }));
-        function __ccStripCrlf(s) {
-  return String(s).replace(/[\r\n]/g, " ");
-}
-        function __ccNormalizeAddressList(headerName, value) {
-  var raw = Array.isArray(value) ? value.map(function (v) { return String(v); }) : String(value).split(/[,;]/);
-  var entries = raw.map(function (s) { return String(s).replace(/[\r\n]/g, " ").trim(); }).filter(function (s) { return s.length > 0; });
-  for (var i = 0; i < entries.length; i++) {
-    var entry = entries[i];
-    var addr = entry.indexOf("<") >= 0 ? entry.slice(entry.indexOf("<") + 1, entry.indexOf(">")) : entry;
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(addr.trim())) {
-      throw new Error("Invalid " + headerName + " address: " + JSON.stringify(entry));
-    }
-  }
-  return entries.join(", ");
-}
-        function __ccOptHeader(name, value) {
-  if (value === undefined || value === null) return "";
-  var list = __ccNormalizeAddressList(name, value);
-  return list.length > 0 ? "\r\n" + name + ": " + list : "";
-}
-        function __ccBase64UrlEncode(str) {
-  const bytes = new TextEncoder().encode(str);
-  let binary = "";
-  for (const b of bytes) binary += String.fromCharCode(b);
-  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-}
-        const gmail_1_raw = "To: " + __ccStripCrlf(ctx.input?.attendeeEmail) + "\r\nSubject: " + __ccStripCrlf(`Interview scheduled: ${((__v) => __v !== null && typeof __v === "object" ? JSON.stringify(__v) : __v)(ctx.input?.summary)}`) + "\r\nContent-Type: text/plain; charset=utf-8" + "\r\n\r\n" + `Hi,
 
-Your interview has been scheduled.
-
-When: ${((__v) => __v !== null && typeof __v === "object" ? JSON.stringify(__v) : __v)(ctx.input?.startDateTime)} - ${((__v) => __v !== null && typeof __v === "object" ? JSON.stringify(__v) : __v)(ctx.input?.endDateTime)}
-Details: ${((__v) => __v !== null && typeof __v === "object" ? JSON.stringify(__v) : __v)(ctx.input?.description)}
-
-A calendar invitation has been sent to you.
-
-Best regards`;
-        const gmail_1_enc = __ccBase64UrlEncode(gmail_1_raw);
-        const gmail_1_resRes = await fetch("https://gmail.googleapis.com/gmail/v1/users/me/messages/send", {
-          method: "POST",
-          headers: {
-            "Authorization": "Bearer " + env.CREDENTIAL_GMAIL_1,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ raw: gmail_1_enc }),
-        });
-        if (!gmail_1_resRes.ok) {
-          throw new Error("Gmail API error " + gmail_1_resRes.status + ": " + (await gmail_1_resRes.text()));
-        }
-        const gmail_1_res_text = await gmail_1_resRes.text();
-        let gmail_1_res = {};
-        if (gmail_1_res_text.trim() !== "") {
-          try { gmail_1_res = JSON.parse(gmail_1_res_text); } catch { gmail_1_res = gmail_1_res_text; }
-        }
-        ctx.nodes["gmail_1"] = gmail_1_res;
-        env.CC_ANALYTICS?.writeDataPoint({
-          blobs: [ctx.workflow.id, ctx.execution.id, "gmail_1", "gmail", "success"],
-          doubles: [Date.now() - __ccStart],
-          indexes: [ctx.workflow.id],
-        });
-        if (__ccRunLog.length < 500) { __ccRunLog.push({ nodeId: "gmail_1", nodeType: "gmail", status: "success", input: __ccSnapshot({ "google_calendar_1": ctx.nodes["google_calendar_1"] }, 32768), output: __ccSnapshot(ctx.nodes["gmail_1"], 32768) }); }
-        console.log("__CC_DEBUG__" + JSON.stringify({ nodeId: "gmail_1", phase: "success", input: __ccSnapshot({ "google_calendar_1": ctx.nodes["google_calendar_1"] }, 32768), output: __ccSnapshot(ctx.nodes["gmail_1"], 32768) }));
-      }
-
-      ctx.output = ctx.nodes["gmail_1"] ?? ctx.output;
+      ctx.output = ctx.nodes["google_calendar_1"] ?? ctx.output;
       return new Response(JSON.stringify(ctx.output), { status: 200, headers: { "Content-Type": "application/json" } });
     } catch (err) {
       __ccStatus = "error";

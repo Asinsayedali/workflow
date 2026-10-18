@@ -4,8 +4,7 @@
     "id": "f1e3b118-2899-453c-aef7-b46035bd28be",
     "name": "Demo"
   },
-  "versionNumber": 1,
-  "compiledScriptHash": "134bb825",
+  "compiledScriptHash": "d67cfbdc",
   "nodes": [
     {
       "id": "manual_trigger_1",
@@ -42,23 +41,6 @@
         "attendees": "{{$json.attendeeEmail}}",
         "credential": "10064805-6e40-4a7b-9036-01dccba63f11"
       }
-    },
-    {
-      "id": "gmail_1",
-      "type": "gmail",
-      "position": {
-        "x": 552,
-        "y": -29
-      },
-      "data": {
-        "operation": "send",
-        "maxResults": 20,
-        "to": "{{$json.attendeeEmail}}",
-        "subject": "Interview scheduled: {{$json.summary}}",
-        "body": "Hi,\n\nYour interview has been scheduled.\n\nWhen: {{$json.startDateTime}} - {{$json.endDateTime}}\nDetails: {{$json.description}}\n\nA calendar invitation has been sent to you.\n\nBest regards",
-        "emailType": "text",
-        "credential": "4c1128ac-3c24-419b-bc85-fbbc6e2cd7db"
-      }
     }
   ],
   "edges": [
@@ -66,11 +48,6 @@
       "id": "edge_1",
       "source": "manual_trigger_1",
       "target": "google_calendar_1"
-    },
-    {
-      "id": "edge_2",
-      "source": "google_calendar_1",
-      "target": "gmail_1"
     }
   ],
   "settings": {}
